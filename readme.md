@@ -1,35 +1,46 @@
 ### Common Kafka Questions
-*What is Apache Kafka?*
+***What is Apache Kafka?***
+
 A distributed, fault tolerant and highly scalable message broker and stream processing platform.
 
-*Why Zookeeper is used with Kafka Cluster?*
+***Why Zookeeper is used with Kafka Cluster?***
+
 Zookeper works to orchastrate the kafka Cluster.
 
-*What is Producer?*
+***What is Producer?***
+
 A Producer is a client that sends messages to a Kafka topic.
 
-*What is Consumer?*
+***What is Consumer?***
+
 A Consumer is a client that reads messages from a Kafka topic.
 
-*What is Kafka Broker?*
+***What is Kafka Broker?***
+
 A Kafka Broker is a server that stores and serves Kafka topics and their messages.
 
-*How does Kafka ensure durability?*
+***How does Kafka ensure durability?***
+
 Kafka ensures durability through data replication and persistent storage. Each message is written to disk and replicated across multiple brokers in the cluster. This replication ensures that even if one broker fails, the data is still available on other brokers. Additionally, Kafka uses a commit log to store messages, which allows for recovery in case of failures.
 
-*What is a topic?*
+***What is a topic?***
+
 A topic in Kafka is a logical channel to which producers send messages and from which consumers read messages. It acts as a queue where messages are stored and categorized under a specific name, allowing multiple producers and consumers to interact with the data independently.
 
-*What is a partition? How is it related to a Kafka topic?*
+***What is a partition? How is it related to a Kafka topic?***
+
 A partition is a division of a Kafka topic. Each topic is split into multiple partitions to allow for parallel processing of messages. Partitions enable Kafka to scale horizontally by distributing the data across multiple brokers, and they ensure fault tolerance by replicating data across different brokers.
 
-*Can you explain partition with a real-world application example, like a ride-sharing application?*
+***Can you explain partition with a real-world application example, like a ride-sharing application?***
+
 In a ride-sharing application, a topic could represent all ride requests. Each partition within this topic could represent ride requests for a specific geographic region. This way, ride requests from different regions can be processed in parallel by different consumers, ensuring that the system can handle a large number of ride requests efficiently. Producers (users requesting rides) send their ride requests to the appropriate partition based on their location, and consumers (drivers) read from the partition corresponding to their region to find nearby ride requests.
 
-*How can partitions help if there is only one location in the ride-sharing app?*
+***How can partitions help if there is only one location in the ride-sharing app?***
+
 Even if there is only one location, partitions can still help by distributing the load across multiple partitions. For example, ride requests can be distributed across partitions based on the time of the request or the user ID. This allows multiple consumers to process ride requests in parallel, improving the overall throughput and performance of the system. It also provides fault tolerance, as the data is replicated across multiple brokers, ensuring that ride requests are not lost in case of a broker failure.
 
-*Can you explain with a codebase example?*
+***Can you explain with a codebase example?***
+
 ```java
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
